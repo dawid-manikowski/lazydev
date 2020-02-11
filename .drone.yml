@@ -1,0 +1,16 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Build
+  image: plugins/docker
+  settings:
+    repo: czoksu/lazydev
+    username:
+      from_secret: DOCKERHUB_USR
+    password:
+      from_secret: DOCKERHUB_PWD
+    tags:
+    - latest
