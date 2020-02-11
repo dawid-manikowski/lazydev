@@ -9,6 +9,7 @@ steps:
   environment:
     GCP_SECRET:
       from_secret: GAE_CREDENTIALS
+    CLOUDSDK_CORE_PROJECT: galvanic-circle-213007
   commands:
   - "printf \"%s\" \"$$GCP_SECRET\" > /tmp/creds.json"
   - "cat /tmp/creds.json"
