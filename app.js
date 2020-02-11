@@ -22,7 +22,7 @@ const app = express();
 app.get('/', (req, res) => {
   res
     .status(200)
-    .send('Elo, Kondzio!')
+    .send('Elo, Kondzio! Prawie się udało :o')
     .end();
 });
 
