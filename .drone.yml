@@ -4,6 +4,17 @@ type: docker
 name: default
 
 steps:
+- name: Deploy
+  image: google/cloud-sdk
+  environment:
+    GCP_SECRET:
+      from_secret: GAE_CREDENTIALS
+  commands:
+  - "printf \"%s\" \"$$GCP_SECRET\" > /tmp/creds.json"
+  - "cat /tmp/creds.json"
+  - "gcloud auth activate-service-account drone-201@galvanic-circle-213007.iam.gserviceaccount.com --key-file=/tmp/creds.json"
+  - "gcloud app deploy app.yaml"
+
 - name: Build
   image: plugins/docker
   settings:
@@ -15,9 +26,3 @@ steps:
     tags:
     - latest
 
-- name: Deploy
-  image: google/cloud-sdk
-  commands:
-  - "echo $$GAE_CREDENTIALS > /tmp/creds.json"
-  - "gcloud auth activate-service-account drone-201@galvanic-circle-213007.iam.gserviceaccount.com --key-file=/tmp/creds.json"
-  - "gcloud app deploy app.yaml"
