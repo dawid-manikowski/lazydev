@@ -4,6 +4,11 @@ type: docker
 name: default
 
 steps:
+- name: Build
+  image: node
+  commands:
+  - "npm install"
+
 - name: Deploy
   image: google/cloud-sdk
   environment:
@@ -15,7 +20,7 @@ steps:
   - "gcloud auth activate-service-account drone-201@galvanic-circle-213007.iam.gserviceaccount.com --key-file=/tmp/creds.json"
   - "gcloud app deploy app.yaml"
 
-- name: Build
+- name: Docker
   image: plugins/docker
   settings:
     repo: czoksu/lazydev
@@ -25,4 +30,3 @@ steps:
       from_secret: DOCKERHUB_PWD
     tags:
     - latest
-
