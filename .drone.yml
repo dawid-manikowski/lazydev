@@ -13,7 +13,6 @@ steps:
   commands:
   - "printf \"%s\" \"$$GCP_SECRET\" > /tmp/creds.json"
   - "gcloud auth activate-service-account drone-201@galvanic-circle-213007.iam.gserviceaccount.com --key-file=/tmp/creds.json"
-  - "gcloud app create --region=us-central --project=galvanic-circle-213007 "
   - "gcloud app deploy app.yaml"
 
 - name: Build
