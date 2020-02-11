@@ -14,3 +14,10 @@ steps:
       from_secret: DOCKERHUB_PWD
     tags:
     - latest
+
+- name: Deploy
+  image: nytimes/drone-gae
+  settings:
+    action: deploy
+    version: latest
+    service: czoksu/lazydev
